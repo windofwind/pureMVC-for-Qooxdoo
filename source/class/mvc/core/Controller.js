@@ -145,7 +145,7 @@ qx.Class.define("mvc.core.Controller", {
             }
 
             var commandInstance = new commandClassRef();
-            commandInstance.excute( notification );
+            commandInstance.execute( notification );
             commandInstance.dispose();
         },
 
