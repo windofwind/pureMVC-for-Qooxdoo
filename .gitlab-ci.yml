@@ -1,0 +1,10 @@
+before_script:
+  - apt-get update -qq && apt-get install -y -qq python
+  
+source:
+  script:
+    - python generate.py distclean && python generate.py
+
+build:
+  script:
+    - python generate.py distclean && python generate.py build
