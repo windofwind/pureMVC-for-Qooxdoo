@@ -29,7 +29,7 @@
  */
 qx.Class.define("mvc.patterns.observer.Notifier", {
     extend: qx.core.Object,
-    implement : [
+    implement: [
         mvc.interfaces.INotification
     ],
 
@@ -67,27 +67,30 @@ qx.Class.define("mvc.patterns.observer.Notifier", {
         /**
          * the name of the <code>Notification</code> instance.
          */
-        notificationName:{
-            nullable:false,
-            init:"",
-            check:"String"
+        notificationName: {
+            dereference: true,
+            nullable: false,
+            init: "",
+            check: "String"
         },
 
         /**
          * the body of the <code>Notification</code> instance.
          */
-        body:{
-            init:null,
-            check:"Object"
+        body: {
+            dereference: true,
+            init: null,
+            check: "Object"
         },
 
         /**
          * the type of the <code>Notification</code> instance.
          */
-        type:{
-            nullable:false,
-            init:"",
-            check:"String"
+        type: {
+            dereference: true,
+            nullable: false,
+            init: "",
+            check: "String"
         }
     },
 
@@ -97,7 +100,7 @@ qx.Class.define("mvc.patterns.observer.Notifier", {
      *****************************************************************************
      */
     members: {
-        _facade:mvc.patterns.Facade.getInstance(),
+        _facade: mvc.patterns.Facade.getInstance(),
         /**
          * Create and send an <code>INotification</code>.
          *
@@ -108,12 +111,12 @@ qx.Class.define("mvc.patterns.observer.Notifier", {
          * @param body {Object} the body of the notification (optional)
          * @param type {String} the type of the notification (optional)
          */
-        sendNotification:function(notificationName, body, type) {
-            this._facade.sendNotification( notificationName, body, type );
+        sendNotification: function (notificationName, body, type) {
+            this._facade.sendNotification(notificationName, body, type);
         }
     },
 
     destruct: function () {
-		this.resetBody();
+        this.resetBody();
     }
 });

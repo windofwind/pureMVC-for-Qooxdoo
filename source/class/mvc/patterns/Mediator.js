@@ -69,6 +69,7 @@ qx.Class.define("mvc.patterns.Mediator", {
          * The name of the <code>Mediator</code>.
          */
         mediatorName: {
+            dereference: true,
             nullable: false,
             init: "",
             check: "String"

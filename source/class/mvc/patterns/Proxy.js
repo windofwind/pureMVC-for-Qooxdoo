@@ -77,6 +77,7 @@ qx.Class.define("mvc.patterns.Proxy", {
      */
     properties: {
         proxyName: {
+            dereference: true,
             init: "Proxy",
             check: "String"
         },

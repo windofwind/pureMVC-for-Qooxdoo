@@ -48,27 +48,30 @@ qx.Interface.define("mvc.interfaces.INotification", {
         /**
          * the name of the <code>Notification</code> instance.
          */
-        notificationName:{
-            nullable:false,
-            init:"",
-            check:"String"
+        notificationName: {
+            dereference: true,
+            nullable: false,
+            init: "",
+            check: "String"
         },
 
         /**
          * the body of the <code>Notification</code> instance.
          */
-        body:{
-            init:null,
-            check:"Object"
+        body: {
+            dereference: true,
+            init: null,
+            check: "Object"
         },
 
         /**
          * the type of the <code>Notification</code> instance.
          */
-        type:{
-            nullable:false,
-            init:"",
-            check:"String"
+        type: {
+            dereference: true,
+            nullable: false,
+            init: "",
+            check: "String"
         }
     },
     /*
@@ -81,6 +84,6 @@ qx.Interface.define("mvc.interfaces.INotification", {
          * Get the string representation of the <code>INotification</code> instance
          * @return {String}
          */
-        toString:function() {}
+        toString: function () { }
     }
 });

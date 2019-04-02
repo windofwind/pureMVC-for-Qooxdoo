@@ -39,7 +39,7 @@
  */
 qx.Class.define("mvc.patterns.observer.Notification", {
     extend: qx.core.Object,
-    implement : [
+    implement: [
         mvc.interfaces.INotification
     ],
 
@@ -96,29 +96,31 @@ qx.Class.define("mvc.patterns.observer.Notification", {
         /**
          * the name of the <code>Notification</code> instance.
          */
-        notificationName:{
-            nullable:false,
-            init:"",
-            check:"String"
+        notificationName: {
+            dereference: true,
+            nullable: false,
+            init: "",
+            check: "String"
         },
 
         /**
          * the body of the <code>Notification</code> instance.
          */
-        body:{
-            dereference:true,
-            nullable:true,
-            init:null,
-            check:"Object"
+        body: {
+            dereference: true,
+            nullable: true,
+            init: null,
+            check: "Object"
         },
 
         /**
          * the type of the <code>Notification</code> instance.
          */
-        type:{
-            nullable:true,
-            init:"",
-            check:"String"
+        type: {
+            dereference: true,
+            nullable: true,
+            init: "",
+            check: "String"
         }
     },
 
@@ -133,10 +135,10 @@ qx.Class.define("mvc.patterns.observer.Notification", {
          *
          * @return {String} the string representation of the <code>Notification</code> instance.
          */
-        toString:function() {
+        toString: function () {
             var msg = "Notification Name: " + this.getNotificationName();
-            msg += "\nBody:"+( ( this.getBody() == null )?"null":this.getBody.toString() );
-            msg += "\nType:"+( ( this.getType() == null )?"null":this.getType() );
+            msg += "\nBody:" + ((this.getBody() == null) ? "null" : this.getBody.toString());
+            msg += "\nType:" + ((this.getType() == null) ? "null" : this.getType());
             return msg;
         }
     },
