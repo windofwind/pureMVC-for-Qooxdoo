@@ -24,7 +24,7 @@
  */
 qx.Class.define("mvc.patterns.observer.Observer", {
     extend: qx.core.Object,
-    implement : [
+    implement: [
         mvc.interfaces.IObserver
     ],
 
@@ -56,11 +56,11 @@ qx.Class.define("mvc.patterns.observer.Observer", {
         this.base(arguments, notifyMethod, notifyContext);
 
         if (notifyMethod) {
-            this.setNotifyMethod( notifyMethod );
+            this.setNotifyMethod(notifyMethod);
         }
 
         if (notifyContext) {
-            this.setNotifyContext( notifyContext );
+            this.setNotifyContext(notifyContext);
         }
     },
 
@@ -78,13 +78,15 @@ qx.Class.define("mvc.patterns.observer.Observer", {
      *****************************************************************************
      */
     properties: {
-        notifyMethod:{
-            check:"Function"
+        notifyMethod: {
+            dereference: true,
+            check: "Function"
         },
 
-        notifyContext:{
-            init:null,
-            check:"Object"
+        notifyContext: {
+            dereference: true,
+            init: null,
+            check: "Object"
         }
     },
 
@@ -99,8 +101,8 @@ qx.Class.define("mvc.patterns.observer.Observer", {
          *
          * @param notification {mvc.interfaces.INotification} the <code>INotification</code> to pass to the interested object's notification method.
          */
-        notifyObserver:function(notification) {
-            this.getNotifyMethod().apply(this.getNotifyContext(),[notification]);
+        notifyObserver: function (notification) {
+            this.getNotifyMethod().apply(this.getNotifyContext(), [notification]);
         },
 
         /**
@@ -109,12 +111,12 @@ qx.Class.define("mvc.patterns.observer.Observer", {
          * @param object {Object} the object to compare
          * @return {Boolean} boolean indicating if the object and the notification context are the same
          */
-        compareNotifyContext:function(object) {
+        compareNotifyContext: function (object) {
             return object === this.getNotifyContext();
         },
 
-        toString:function() {
-            var msg = this.classname + "[" + this.$$hash + "]" ;
+        toString: function () {
+            var msg = this.classname + "[" + this.$$hash + "]";
             msg += "\nNotifyContext : " + (this.getNotifyContext().classname);
 
             return msg;

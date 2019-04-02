@@ -25,7 +25,7 @@
  */
 qx.Class.define("mvc.patterns.Proxy", {
     extend: mvc.patterns.observer.Notifier,
-    implement : [
+    implement: [
         mvc.interfaces.IProxy,
         mvc.interfaces.INotifier
     ],
@@ -76,15 +76,16 @@ qx.Class.define("mvc.patterns.Proxy", {
      *****************************************************************************
      */
     properties: {
-        proxyName:{
-            init:"Proxy",
-            check:"String"
+        proxyName: {
+            init: "Proxy",
+            check: "String"
         },
 
-        data:{
-            init:null,
-            check:"Object",
-            apply:"_applyData"
+        data: {
+            dereference: true,
+            init: null,
+            check: "Object",
+            apply: "_applyData"
         }
     },
 
@@ -94,7 +95,7 @@ qx.Class.define("mvc.patterns.Proxy", {
      *****************************************************************************
      */
     members: {
-        _applyData:function(value, old) {
+        _applyData: function (value, old) {
         }
     },
 

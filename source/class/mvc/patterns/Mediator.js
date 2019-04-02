@@ -10,7 +10,7 @@
 
 qx.Class.define("mvc.patterns.Mediator", {
     extend: mvc.patterns.observer.Notifier,
-    implement : [
+    implement: [
         mvc.interfaces.IMediator,
         mvc.interfaces.INotifier
     ],
@@ -21,7 +21,7 @@ qx.Class.define("mvc.patterns.Mediator", {
      *****************************************************************************
      */
     statics: {
-        NAME:"Mediator"
+        NAME: "Mediator"
     },
 
     /*
@@ -68,19 +68,20 @@ qx.Class.define("mvc.patterns.Mediator", {
         /**
          * The name of the <code>Mediator</code>.
          */
-        mediatorName:{
-            nullable:false,
-            init:"",
-            check:"String"
+        mediatorName: {
+            nullable: false,
+            init: "",
+            check: "String"
         },
 
         /**
          * the <code>Mediator</code>'s view component.
          */
         viewComponent: {
-            init:null,
-            check:"Object",
-            event:"addViewComponent"
+            dereference: true,
+            init: null,
+            check: "Object",
+            event: "addViewComponent"
         }
     },
 
@@ -96,7 +97,7 @@ qx.Class.define("mvc.patterns.Mediator", {
          *
          * @return {Array} the list of <code>INotification</code> names
          */
-        listNotificationInterests:function() {
+        listNotificationInterests: function () {
             return [
             ];
         },
@@ -109,7 +110,7 @@ qx.Class.define("mvc.patterns.Mediator", {
          * with one 'case' entry per <code>INotification</code>
          * the <code>Mediator</code> is interested in.
          */
-        handleNotification:function(notification) {
+        handleNotification: function (notification) {
         }
     },
 

@@ -23,9 +23,9 @@
  */
 
 qx.Class.define("mvc.core.View", {
-//    type:"singleton",
+    //    type:"singleton",
     extend: qx.core.Object,
-    implement : mvc.interfaces.IView,
+    implement: mvc.interfaces.IView,
 
     /*
      *****************************************************************************
@@ -33,15 +33,15 @@ qx.Class.define("mvc.core.View", {
      *****************************************************************************
      */
     statics: {
-        _instance:null,
-        getInstance:function() {
+        _instance: null,
+        getInstance: function () {
             if (this._instance == null) {
                 this._instance = new this();
             }
             return this._instance;
         },
 
-        removeInstance:function() {
+        removeInstance: function () {
             if (this._instance) {
                 this._instance.dispose();
                 this._instance = null;
@@ -84,8 +84,8 @@ qx.Class.define("mvc.core.View", {
      *****************************************************************************
      */
     members: {
-        _mediatorMap:null,
-        _observerMap:null,
+        _mediatorMap: null,
+        _observerMap: null,
 
         /**
          * Initialize the Singleton View instance.
@@ -98,7 +98,7 @@ qx.Class.define("mvc.core.View", {
          *
          * @return {void}
          */
-        _initializeView:function( ) {
+        _initializeView: function () {
 
         },
 
@@ -111,13 +111,13 @@ qx.Class.define("mvc.core.View", {
          *  The Observer to register.
          * @return {void}
          */
-        registerObserver:function( notificationName, observer ) {
-            var observers = this._observerMap[ notificationName ];
+        registerObserver: function (notificationName, observer) {
+            var observers = this._observerMap[notificationName];
 
-            if( observers ) {
-                observers.push( observer );
+            if (observers) {
+                observers.push(observer);
             } else {
-                this._observerMap[ notificationName ] = [ observer ];
+                this._observerMap[notificationName] = [observer];
             }
         },
 
@@ -132,30 +132,30 @@ qx.Class.define("mvc.core.View", {
          *  The Notification to notify Observers of
          * @return {void}
          */
-        notifyObservers:function( notification ) {
-            if( this._observerMap[ notification.getNotificationName() ] != null ) {
+        notifyObservers: function (notification) {
+            if (this._observerMap[notification.getNotificationName()] != null) {
 
                 // Get a reference to the observers list for this notification name
-                var observers_ref = this._observerMap[ notification.getNotificationName() ];
+                var observers_ref = this._observerMap[notification.getNotificationName()];
 
-                observers_ref.forEach(function(item, index, Array) {
-                    item.notifyObserver( notification );
+                observers_ref.forEach(function (item, index, Array) {
+                    item.notifyObserver(notification);
                 });
                 // Copy observers from reference array to working array,
                 // since the reference array may change during the notification loop
-//                var observers = [];
-//                var observer;
-//
-//                for (var i = 0; i < observers_ref.length; i++) {
-//                    observer = observers_ref[ i ];
-//                    observers.push( observer );
-//                }
-//
-//                // Notify Observers from the working array
-//                for (i = 0; i < observers.length; i++) {
-//                    observer = observers[ i ];
-//                    observer.notifyObserver( notification );
-//                }
+                //                var observers = [];
+                //                var observer;
+                //
+                //                for (var i = 0; i < observers_ref.length; i++) {
+                //                    observer = observers_ref[ i ];
+                //                    observers.push( observer );
+                //                }
+                //
+                //                // Notify Observers from the working array
+                //                for (i = 0; i < observers.length; i++) {
+                //                    observer = observers[ i ];
+                //                    observer.notifyObserver( notification );
+                //                } 
             }
         },
 
@@ -169,19 +169,18 @@ qx.Class.define("mvc.core.View", {
          *  Remove the Observer with this object as its notifyContext
          * @return {void}
          */
-        removeObserver:function( notificationName, notifyContext) {
+        removeObserver: function (notificationName, notifyContext) {
             // the observer list for the notification under inspection
-            var observers = this._observerMap[ notificationName ];
+            var observers = this._observerMap[notificationName];
 
 
             var ob;
             // find the observer for the notifyContext
-            for ( var i = 0; i<observers.length; i++ )
-            {
-                if ( observers[i].compareNotifyContext( notifyContext ) == true ) {
+            for (var i = 0; i < observers.length; i++) {
+                if (observers[i].compareNotifyContext(notifyContext) == true) {
                     // there can only be one Observer for a given notifyContext
                     // in any given Observer list, so remove it and break
-//                    observers.splice(i,1);
+                    //                    observers.splice(i,1);
                     ob = qx.lang.Array.removeAt(observers, i);
                     ob.dispose();
                     break;
@@ -190,8 +189,8 @@ qx.Class.define("mvc.core.View", {
 
             // Also, when a Notification's Observer list length falls to
             // zero, delete the notification key from the observer map
-            if ( observers.length == 0 ) {
-                delete this._observerMap[ notificationName ];
+            if (observers.length == 0) {
+                delete this._observerMap[notificationName];
             }
         },
 
@@ -212,27 +211,26 @@ qx.Class.define("mvc.core.View", {
          * @param mediator {mvc.interfaces.IMediator}
          *  a reference to the Mediator instance
          */
-        registerMediator:function( mediator ) {
+        registerMediator: function (mediator) {
             // do not allow re-registration (you must to removeMediator fist)
-            if ( this._mediatorMap[ mediator.getMediatorName() ] != null ) {
+            if (this._mediatorMap[mediator.getMediatorName()] != null) {
                 return;
             }
 
             // Register the Mediator for retrieval by name
-            this._mediatorMap[ mediator.getMediatorName() ] = mediator;
+            this._mediatorMap[mediator.getMediatorName()] = mediator;
 
             // Get Notification interests, if any.
             var interests = mediator.listNotificationInterests();
 
             // Register Mediator as an observer for each of its notification interests
-            if ( interests.length > 0 )
-            {
+            if (interests.length > 0) {
                 // Create Observer referencing this mediator's handlNotification method
-                var observer = new mvc.patterns.observer.Observer( mediator.handleNotification, mediator );
+                var observer = new mvc.patterns.observer.Observer(mediator.handleNotification, mediator);
 
                 // Register Mediator as Observer for its list of Notification interests
-                for ( var i=0;  i<interests.length; i++ ) {
-                    this.registerObserver( interests[i],  observer );
+                for (var i = 0; i < interests.length; i++) {
+                    this.registerObserver(interests[i], observer);
                 }
             }
         },
@@ -243,8 +241,8 @@ qx.Class.define("mvc.core.View", {
          * @param mediatorName {String}
          * @return {Boolean} whether a Mediator is registered with the given <code>mediatorName</code>.
          */
-        hasMediator:function( mediatorName ) {
-            return this._mediatorMap[ mediatorName ] != null;
+        hasMediator: function (mediatorName) {
+            return this._mediatorMap[mediatorName] != null;
         },
 
         /**
@@ -255,8 +253,8 @@ qx.Class.define("mvc.core.View", {
          * @return {mvc.pattern.mediator.Mediator}
          *  The Mediator instance previously registered with the given mediatorName
          */
-        retrieveMediator:function( mediatorName ) {
-            return this._mediatorMap[ mediatorName ];
+        retrieveMediator: function (mediatorName) {
+            return this._mediatorMap[mediatorName];
         },
 
         /**
@@ -266,23 +264,23 @@ qx.Class.define("mvc.core.View", {
          *  Name of the Mediator instance to be removed
          *  The Mediator that was removed from the View
          */
-        removeMediator:function( mediatorName ) {
+        removeMediator: function (mediatorName) {
             // Retrieve the named mediator
-            var mediator = this._mediatorMap[ mediatorName ];
+            var mediator = this._mediatorMap[mediatorName];
 
-            if ( mediator ) {
+            if (mediator) {
                 // for every notification this mediator is interested in...
                 var interests = mediator.listNotificationInterests();
-                for ( var i = 0; i<interests.length; i++ ) {
+                for (var i = 0; i < interests.length; i++) {
                     // remove the observer linking the mediator
                     // to the notification interest
-                    this.removeObserver( interests[i], mediator );
+                    this.removeObserver(interests[i], mediator);
                 }
 
 
                 // remove the mediator from the map
-                this._mediatorMap[ mediatorName ].dispose();
-                delete this._mediatorMap[ mediatorName ];
+                this._mediatorMap[mediatorName].dispose();
+                delete this._mediatorMap[mediatorName];
 
                 // alert the mediator that it has been removed
                 mediator.dispose();
@@ -298,7 +296,7 @@ qx.Class.define("mvc.core.View", {
         }
 
         for (var name in this._observerMap) {
-            this._observerMap[name].forEach(function(item, index, array) {
+            this._observerMap[name].forEach(function (item, index, array) {
                 item.dispose();
             });
 
