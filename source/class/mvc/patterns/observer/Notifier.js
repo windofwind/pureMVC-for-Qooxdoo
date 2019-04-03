@@ -117,8 +117,5 @@ qx.Class.define("mvc.patterns.observer.Notifier", {
     },
 
     destruct: function () {
-        this.reset("notificationName");
-        this.reset("body");
-        this.reset("type");
     }
 });
