@@ -1,15 +1,11 @@
 {
-  "name"    : "mvc",
-
-  "include" :
-  [
+  "name": "mvc",
+  "include": [
     {
-      "path" : "${QOOXDOO_PATH}/tool/data/config/application.json"
+      "path": "${QOOXDOO_PATH}/tool/data/config/application.json"
     }
   ],
-
-  "export" :
-  [
+  "export": [
     "api",
     "api-data",
     "build",
@@ -35,61 +31,50 @@
     "validate-manifest",
     "watch"
   ],
-
-  "default-job" : "source-hybrid",
-
-  "let" :
-  {
-    "APPLICATION"  : "mvc",
-    "QOOXDOO_PATH" : "../../qooxdoo-5.0-sdk",
-    "API_EXCLUDE"  : ["qx.test.*", "${APPLICATION}.test.*"],
-    "LOCALES"      : [ "en" ],
-    "CACHE"        : "${TMPDIR}/qx${QOOXDOO_VERSION}/cache",
-    "ROOT"         : "."
+  "default-job": "source-hybrid",
+  "let": {
+    "APPLICATION": "mvc",
+    "QOOXDOO_PATH": "../../qooxdoo-5.0.2-sdk",
+    "API_EXCLUDE": [
+      "qx.test.*",
+      "${APPLICATION}.test.*"
+    ],
+    "LOCALES": [
+      "en"
+    ],
+    "CACHE": "${TMPDIR}/qx${QOOXDOO_VERSION}/cache",
+    "ROOT": "."
   },
-
-  "config-warnings" :
-  {
-    "job-shadowing" : [
+  "config-warnings": {
+    "job-shadowing": [
       "common",
       "dependencies",
       "source-all-script"
     ]
   },
-
   // You only need to edit the remainder of this file, if you want to customize
   // specific jobs, or add own job definitions.
-
-  "jobs" :
-  {
-    "common" :
-    {
-      "=include" :
-      [
+  "jobs": {
+    "common": {
+      "=include": [
         "${APPLICATION}.Application"
       ],
-
-      "=environment" :
-      {
-        "qx.version"     : "5.0",
-        "qx.application" : "${APPLICATION}.Application"
+      "=environment": {
+        "qx.version": "5.0",
+        "qx.application": "${APPLICATION}.Application"
       }
     },
-
-    "source-all-script" :
-    {
-      "=exclude" :
-      [
+    "source-all-script": {
+      "=exclude": [
         "qx.test.*",
         "${APPLICATION}.test.*"
       ]
     },
-
-    "dependencies" :
-    {
-      "=exclude" : [ "${APPLICATION}.test.*" ]
+    "dependencies": {
+      "=exclude": [
+        "${APPLICATION}.test.*"
+      ]
     }
-
     // Uncomment the following entry to add a contrib or library to your
     // project; make sure to adapt the path to the Manifest.json; if you are
     // using a contrib: library, it will be downloaded into the path specified
@@ -105,7 +90,6 @@
       ]
     },
     */
-
     // If you want to tweak a job setting, see the following sample where
     // the "format" feature of the "build-script" job is overridden.
     // To see a list of available jobs, invoke 'generate.py x'.

@@ -1,34 +1,27 @@
 {
-  "info" : 
-  {
-    "name" : "mvc",
-
-    "summary" : "Custom Application",
-    "description" : "This is a skeleton for a custom application with qooxdoo.",
-    
-    "homepage" : "http://some.homepage.url/",
-
-    "license" : "SomeLicense",
-    "authors" : 
-    [
+  "info": {
+    "name": "mvc",
+    "summary": "Custom Application",
+    "description": "This is a skeleton for a custom application with qooxdoo.",
+    "homepage": "https://github.com/windofwind/pureMVC-for-Qooxdoo",
+    "license": "SomeLicense",
+    "authors": [
       {
-        "name" : "First Author (uid)",
-        "email" : "first.author@some.domain"
+        "name": "windofwind",
+        "email": "windofwind@gmail.com"
       }
     ],
-
-    "version" : "trunk",
-    "qooxdoo-versions": ["5.0"]
+    "version": "trunk",
+    "qooxdoo-versions": [
+      "5.0.2"
+    ]
   },
-  
-  "provides" : 
-  {
-    "namespace"   : "mvc",
-    "encoding"    : "utf-8",
-    "class"       : "source/class",
-    "resource"    : "source/resource",
-    "translation" : "source/translation",
-    "type"        : "application"
+  "provides": {
+    "namespace": "mvc",
+    "encoding": "utf-8",
+    "class": "source/class",
+    "resource": "source/resource",
+    "translation": "source/translation",
+    "type": "application"
   }
 }
-
