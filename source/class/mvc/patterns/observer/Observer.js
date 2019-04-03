@@ -124,6 +124,7 @@ qx.Class.define("mvc.patterns.observer.Observer", {
     },
 
     destruct: function () {
-        this.getNotifyContext();
+        this.reset("notifyContext");
+        this.reset("notifyMethod");
     }
 });
